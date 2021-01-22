@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <include resource="reform-base.xml" />
-    <appender name="TEST_APPENDER" class="uk.gov.hmcts.reform.logging.TestAppender"/>
+    <include resource="logback-base.xml" />
+    <appender name="TEST_APPENDER" class="app.quickcase.logging.TestAppender"/>
 
     <root level="DEBUG">
         <appender-ref ref="CONSOLE"/>

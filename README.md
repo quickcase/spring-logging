@@ -1,21 +1,16 @@
-[![Build Status](https://travis-ci.org/hmcts/java-logging.svg?branch=master)](https://travis-ci.org/hmcts/java-logging)
-[![GitHub version](https://badge.fury.io/gh/hmcts%2Fjava-logging.svg)](https://badge.fury.io/gh/hmcts%2Fjava-logging)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ebac86c131154ef2b59ab302d1d75fd9)](https://www.codacy.com/app/HMCTS/java-logging)
-[![codecov](https://codecov.io/gh/hmcts/java-logging/branch/master/graph/badge.svg)](https://codecov.io/gh/hmcts/java-logging)
-[![Known Vulnerabilities](https://snyk.io/test/github/hmcts/java-logging/badge.svg)](https://snyk.io/test/github/hmcts/java-logging)
-[ ![Download](https://api.bintray.com/packages/hmcts/hmcts-maven/logging/images/download.svg) ](https://bintray.com/hmcts/hmcts-maven/logging/_latestVersion)
-
-# Reform Java logging module
+# QuickCase Java logging module
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Build status](https://github.com/quickcase/spring-logging/workflows/Quality%20checks/badge.svg)](https://github.com/quickcase/spring-logging/actions)
 
 A Java module which standardises the logging for the reform projects.
 
 ## Prerequisites
 
-- [Java 8](https://www.oracle.com/java)
+- [Java 11](https://www.oracle.com/java)
 
 ## User guide
 
-The module provides a `logback.xml` configuration file which configures Logback to use a default reform format.
+The module provides a `logback.xml` configuration file which configures Logback to use a default quickcase format.
 It allows a number of configuration options to customize the logging to your needs.
 
 
@@ -25,12 +20,8 @@ Simply add base component as your project's dependency and then one or more of t
 
 Base component dependency, gradle:
 ```groovy
-compile group: 'uk.gov.hmcts.reform', name: 'logging', version: '5.1.1'
+compile group: 'app.quickcase.logging', name: 'logging', version: '6.0.0'
 ```
-
-#### java-logging-insights
-
-Use for automatic configuration of Azure Application Insights for a Spring Boot project. [Read more](java-logging-appinsights/README.md)
 
 #### java-logging-spring
 
@@ -39,7 +30,7 @@ Use for formatting log output in Spring Boot applications.
 
 Gradle:
 ```groovy
-compile group: 'uk.gov.hmcts.reform', name: 'logging-spring', version: '5.1.1'
+compile group: 'app.quickcase.logging', name: 'logging-spring', version: '6.0.0'
 ```
 
 #### java-logging-httpcomponents
@@ -48,7 +39,7 @@ Use for adding request IDs to external HTTP / HTTPS requests.
 
 Gradle:
 ```groovy
-compile group: 'uk.gov.hmcts.reform', name: 'logging-httpcomponents', version: '5.1.1'
+compile group: 'app.quickcase.logging', name: 'logging-httpcomponents', version: '6.0.0'
 ```
 
 **Please note:** You will also need to implement a class that configures an HTTP client with interceptors for outbound HTTP requests and responses. See https://github.com/hmcts/cmc-claim-store/blob/master/src/main/java/uk/gov/hmcts/cmc/claimstore/clients/RestClient.java#L98 for an example.
@@ -87,8 +78,8 @@ specific loggers, e.g.:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <included>
-  <logger name="uk.goc.hmcts.reform" level="DEBUG"/>
-  <logger name="uk.goc.hmcts.reform.resources" level="WARN"/>
+  <logger name="app.quickcase.logging" level="DEBUG"/>
+  <logger name="app.quickcase.logging.resources" level="WARN"/>
 </included>
 ```
 
@@ -151,11 +142,3 @@ Error code is introduced as legacy error group not minding the fact exceptions t
 There is a helper `UnknownErrorCodeException` class which populates the field with `UNKNOWN` as error code.
 
 Alert level is still required.
-
-### Releasing
-
-Run the script `./prepare-for-release.sh` select an appropriate version and follow the instructions the script provides
-
-## Future development considerations
-
-- [MDC](https://logback.qos.ch/manual/mdc.html) for capturing and logging request identifiers.
