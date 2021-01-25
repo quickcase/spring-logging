@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+Base of all the logging files.
+-->
+
+<included>
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator"/>
+    <include optional="true" resource="${LOGBACK_INCLUDES_FILE:-logback-includes.xml}"/>
+    <include resource="console-appender.xml"/>
+    <shutdownHook class="ch.qos.logback.core.hook.DelayingShutdownHook"/>
+</included>

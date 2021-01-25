@@ -1,27 +1,16 @@
-buildscript {
-  dependencies {
-    classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.5'
-  }
-}
-
 plugins {
   id 'org.owasp.dependencycheck' version '6.0.3'
-  id 'com.github.ben-manes.versions' version '0.36.0'
 }
 
-def buildNumber = System.getenv("RELEASE_VERSION")?.replace("refs/tags/", "") ?: "DEV-SNAPSHOT"
-
 allprojects {
-  group 'uk.gov.hmcts.reform'
-  version buildNumber
+  group 'app.quickcase.logging'
+  version '6.0.0-rc1'
 
   apply plugin: 'java'
   apply plugin: 'java-library'
   apply plugin: 'maven-publish'
   apply plugin: 'checkstyle'
-  apply plugin: 'com.jfrog.bintray'
   apply plugin: 'jacoco'
-  apply plugin: 'com.github.ben-manes.versions'
   apply plugin: 'pmd'
 
   checkstyle {
@@ -43,28 +32,12 @@ allprojects {
     toolVersion = "0.8.4"
   }
 
-  sourceCompatibility = 1.8
+  sourceCompatibility = 11
 
   repositories {
     mavenLocal()
     mavenCentral()
     jcenter()
-  }
-
-  configurations.all {
-    resolutionStrategy {
-      eachDependency { DependencyResolveDetails details ->
-        if (details.requested.group in ['com.fasterxml.jackson.core', 'com.fasterxml.jackson.module', 'com.fasterxml.jackson.datatype']) {
-          details.useVersion '2.9.9'
-        }
-        if (details.requested.name == 'jackson-databind') {
-          details.useVersion '2.9.10'
-        }
-        if (details.requested.name == 'guava') {
-          details.useVersion '28.0-jre'
-        }
-      }
-    }
   }
 
   dependencies {
@@ -74,18 +47,6 @@ allprojects {
     implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
     api group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
     testImplementation group: 'junit', name: 'junit', version: '4.13.1'
-  }
-
-  // before committing a change, make sure task still works
-  dependencyUpdates {
-    def isNonStable = { String version ->
-      def stableKeyword = ['RELEASE', 'FINAL', 'GA'].any { qualifier -> version.toUpperCase().contains(qualifier) }
-      def regex = /^[0-9,.v-]+$/
-      return !stableKeyword && !(version ==~ regex)
-    }
-    rejectVersionIf { selection -> // <---- notice how the closure argument is named
-      return isNonStable(selection.candidate.version) && !isNonStable(selection.currentVersion)
-    }
   }
 
   dependencyCheck {
@@ -127,28 +88,22 @@ java {
 
 publishing {
   publications {
-    Main(MavenPublication) {
+    mavenJava(MavenPublication) {
       from components.java
-      groupId project.group
-      artifactId 'logging'
-      version project.version
+      pom {
+        url.set("https://github.com/quickcase/spring-logging.git")
+      }
     }
   }
-}
 
-bintray {
-  user = System.getenv('BINTRAY_USER')
-  key = System.getenv('BINTRAY_KEY')
-  publications = ['Main']
-  publish = true
-  pkg {
-    repo = 'hmcts-maven'
-    name = 'logging'
-    userOrg = 'hmcts'
-    licenses = ['MIT']
-    vcsUrl = 'https://github.com/hmcts/java-logging'
-    version {
-      name = project.version
+  repositories {
+    maven {
+      name = "Github"
+      url = uri("https://maven.pkg.github.com/quickcase/spring-logging")
+      credentials {
+        username = System.getenv("GITHUB_USERNAME")
+        password = System.getenv("GITHUB_PACKAGE_TOKEN")
+      }
     }
   }
 }
