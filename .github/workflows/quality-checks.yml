@@ -5,8 +5,8 @@ on:
       - main
   pull_request:
 env:
-  GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
-  GITHUB_PACKAGE_TOKEN: ${{ secrets.GITHUB_PACKAGE_TOKEN }}
+  GH_USERNAME: ${{ secrets.GH_USERNAME }}
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
 jobs:
   test:
     name: Tests
