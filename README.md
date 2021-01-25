@@ -16,7 +16,7 @@ It allows a number of configuration options to customize the logging to your nee
 
 ### Basic usage
 
-Simply add base component as your project's dependency and then one or more of three components discussed below to use it.
+Simply add base component as your project's dependency and then one or more of two components discussed below to use it.
 
 Base component dependency, gradle:
 ```groovy
@@ -58,15 +58,44 @@ log.info("An important business process has finished");
 
 ### Configuration defaults
 
-By default the module will use a simple, human-friendly logging format which can be used out-of-the-box for development:
+By default, the module will use json logging format which can be used out-of-the-box for development:
 
+Log format can be either set to `JSON` or `CONSOLE` by setting the environment variable `LOG_FORMAT`.
+
+JSON
+```
+{
+  "timestamp" : "2021-01-25T15:06:29.957+0000",
+  "level" : "INFO",
+  "thread" : "main",
+  "message" : "Request GET /some/path processed in 0ms",
+  "logger_name" : "app.quickcase.logging.filters.RequestStatusLoggingFilter"
+}{
+  "timestamp" : "2021-01-25T15:06:30.083+0000",
+  "level" : "ERROR",
+  "thread" : "main",
+  "message" : "Request GET /some/path failed in 0ms",
+  "exception" : "java.lang.RuntimeException: ..",
+  "logger_name" : "app.quickcase.logging.filters.RequestStatusLoggingFilter"
+}
+```
+
+CONSOLE
 ```
 2017-02-02 12:22:23,647 INFO [main] io.dropwizard.assets.AssetsBundle: Registering AssetBundle with name: swagger-assets for path /swagger-static/*
 2017-02-02 12:22:23,806 INFO [main] org.reflections.Reflections: Reflections took 96 ms to scan 1 urls, producing 79 keys and 87 values
 2017-02-02 12:22:24,835 INFO [main] io.dropwizard.server.DefaultServerFactory: Registering jersey handler with root path prefix: /
 ```
 
-Root logging level will be set to `INFO`. It can be adjusted by setting a `ROOT_LOGGING_LEVEL` environment variable.
+The default logging level will be set to `INFO`. It can be adjusted by setting the `LOG_LEVEL` environment variable.
+The following log levels are supported
+```
+ERROR
+WARN
+INFO
+DEBUG
+TRACE
+```
 
 ### Additional Logback configuration:
 

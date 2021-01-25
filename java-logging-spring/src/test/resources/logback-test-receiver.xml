@@ -4,7 +4,7 @@
     <appender name="TEST_APPENDER" class="app.quickcase.logging.TestAppender"/>
 
     <root level="DEBUG">
-        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="JSON"/>
         <appender-ref ref="TEST_APPENDER"/>
     </root>
 
