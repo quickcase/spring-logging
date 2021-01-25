@@ -3,8 +3,8 @@ on:
   push:
     tags: ['**']
 env:
-  GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
-  GITHUB_PACKAGE_TOKEN: ${{ secrets.GITHUB_PACKAGE_TOKEN }}
+  GH_USERNAME: ${{ secrets.GH_USERNAME }}
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
 jobs:
   test:
     name: Tests
@@ -113,8 +113,8 @@ jobs:
       - name: Publish
         run: ./gradlew publish --info
         env:
-          GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
-          GITHUB_PACKAGE_TOKEN: ${{ secrets.GITHUB_PACKAGE_TOKEN }}
+          GH_USERNAME: ${{ secrets.GH_USERNAME }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Notify slack success
         if: success()
