@@ -20,7 +20,7 @@ Simply add base component as your project's dependency and then one or more of t
 
 Base component dependency, gradle:
 ```groovy
-compile group: 'app.quickcase.logging', name: 'logging', version: '6.0.0'
+compile group: 'app.quickcase.logging', name: 'java-logging', version: '6.0.0'
 ```
 
 #### java-logging-spring
