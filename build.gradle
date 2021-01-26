@@ -1,10 +1,10 @@
 plugins {
-  id 'org.owasp.dependencycheck' version '6.0.3'
+  id 'org.owasp.dependencycheck' version '6.0.5'
 }
 
 allprojects {
   group 'app.quickcase.logging'
-  version '6.0.0'
+  version '6.0.1'
 
   apply plugin: 'java'
   apply plugin: 'java-library'
@@ -14,7 +14,7 @@ allprojects {
   apply plugin: 'pmd'
 
   checkstyle {
-    toolVersion = '8.24'
+    toolVersion = '8.39'
     maxWarnings = 0
     getConfigDirectory().set(new File(rootDir, "config/checkstyle"))
   }
@@ -54,7 +54,7 @@ allprojects {
   dependencyCheck {
     // Specifies if the build should be failed if a CVSS score above a specified level is identified.
     // range of 0-10 fails the build, anything greater and it doesn't fail the build
-    failBuildOnCVSS = System.getProperty('dependencyCheck.failBuild') == 'true' ? 0 : 11
+    failBuildOnCVSS = 0
     suppressionFile = "$rootDir/config/owasp/suppressions.xml"
     analyzers {
       // Disable scanning of .NET related binaries
