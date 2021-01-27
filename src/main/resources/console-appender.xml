@@ -20,7 +20,7 @@
             <layout class="app.quickcase.logging.json.CustomJsonLayout">
                 <jsonFormatter
                     class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">
-                    <prettyPrint>true</prettyPrint>
+                    <prettyPrint>false</prettyPrint>
                 </jsonFormatter>
                 <timestampFormat>${LOGBACK_DATE_FORMAT}</timestampFormat>
             </layout>
