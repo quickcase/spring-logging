@@ -3,17 +3,6 @@ java {
   withSourcesJar()
 }
 
-publishing {
-  publications {
-    HttpComponents(MavenPublication) {
-      from components.java
-      groupId project.group
-      artifactId 'logging-httpcomponents'
-      version project.version
-    }
-  }
-}
-
 dependencies {
   implementation project(':')
   implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.13'

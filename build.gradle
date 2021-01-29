@@ -4,7 +4,7 @@ plugins {
 
 allprojects {
   group 'app.quickcase.logging'
-  version '6.0.2'
+  version '6.0.3'
 
   apply plugin: 'java'
   apply plugin: 'java-library'
@@ -61,6 +61,28 @@ allprojects {
       assemblyEnabled = false
     }
   }
+
+  publishing {
+    publications {
+      mavenJava(MavenPublication) {
+        from components.java
+        pom {
+          url.set("https://github.com/quickcase/spring-logging.git")
+        }
+      }
+    }
+
+    repositories {
+      maven {
+        name = "Github"
+        url = uri("https://maven.pkg.github.com/quickcase/spring-logging")
+        credentials {
+          username = System.getenv("GH_USERNAME")
+          password = System.getenv("GH_TOKEN")
+        }
+      }
+    }
+  }
 }
 
 task codeCoverageReport(type: JacocoReport, dependsOn: allprojects*.test) {
@@ -86,28 +108,6 @@ task codeCoverageReport(type: JacocoReport, dependsOn: allprojects*.test) {
 java {
   withJavadocJar()
   withSourcesJar()
-}
-
-publishing {
-  publications {
-    mavenJava(MavenPublication) {
-      from components.java
-      pom {
-        url.set("https://github.com/quickcase/spring-logging.git")
-      }
-    }
-  }
-
-  repositories {
-    maven {
-      name = "Github"
-      url = uri("https://maven.pkg.github.com/quickcase/spring-logging")
-      credentials {
-        username = System.getenv("GH_USERNAME")
-        password = System.getenv("GH_TOKEN")
-      }
-    }
-  }
 }
 
 dependencies {
