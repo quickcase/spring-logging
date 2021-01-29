@@ -7,17 +7,6 @@ java {
   withSourcesJar()
 }
 
-publishing {
-  publications {
-    Spring(MavenPublication) {
-      from components.java
-      groupId project.group
-      artifactId 'logging-spring'
-      version project.version
-    }
-  }
-}
-
 def versions = [
   springBoot: '2.4.2'
 ]
