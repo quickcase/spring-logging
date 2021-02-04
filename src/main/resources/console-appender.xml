@@ -23,6 +23,7 @@
                     <prettyPrint>false</prettyPrint>
                 </jsonFormatter>
                 <timestampFormat>${LOGBACK_DATE_FORMAT}</timestampFormat>
+                <appendLineSeparator>true</appendLineSeparator>
             </layout>
         </encoder>
     </appender>
