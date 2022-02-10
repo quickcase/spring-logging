@@ -60,6 +60,13 @@ allprojects {
       // Disable scanning of .NET related binaries
       assemblyEnabled = false
     }
+
+    skipConfigurations = [
+      "checkstyle",
+      "jacocoAgent",
+      "jacocoAnt",
+      "pmd",
+    ]
   }
 
   publishing {
