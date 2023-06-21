@@ -50,7 +50,7 @@ allprojects {
     implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.4.7'
     implementation group: 'ch.qos.logback.contrib', name: 'logback-jackson', version: '0.1.5'
     implementation group: 'ch.qos.logback.contrib', name: 'logback-json-classic', version: '0.1.5'
-    api group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+    api group: 'jakarta.servlet', name: 'jakarta.servlet-api', version: '6.0.0'
     testImplementation group: 'junit', name: 'junit', version: '4.13.1'
   }
 
@@ -124,6 +124,6 @@ dependencies {
   testImplementation group: 'org.mockito', name: 'mockito-core', version: '3.6.28'
   testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.18.1'
   testImplementation group: 'com.github.stefanbirkner', name: 'system-rules', version: '1.19.0'
-  testImplementation group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+  testImplementation group: 'jakarta.servlet', name: 'jakarta.servlet-api', version: '6.0.0'
   testImplementation group: 'com.google.code.tempus-fugit', name: 'tempus-fugit', version: '1.1'
 }
