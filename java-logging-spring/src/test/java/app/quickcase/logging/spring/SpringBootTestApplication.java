@@ -2,10 +2,11 @@ package app.quickcase.logging.spring;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,14 +46,17 @@ public class SpringBootTestApplication {
 
     @Configuration
     @EnableWebSecurity
-    public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
-            http
-                .authorizeRequests()
-                .antMatchers("/public").permitAll()
-                .antMatchers("/failing").permitAll()
-                .antMatchers("/protected").authenticated();
+    public class WebSecurityConfig {
+
+        @Bean
+        @SuppressWarnings("PMD.SignatureDeclareThrowsException")
+        public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+            return http.authorizeHttpRequests((authorize) -> authorize.requestMatchers("/public").permitAll()
+                                                                      .requestMatchers("/failing").permitAll()
+                                                                      .requestMatchers("/destroying").permitAll()
+                                                                      .requestMatchers("/error").permitAll()
+                                                                      .requestMatchers("/protected").authenticated())
+                       .build();
         }
     }
 }
