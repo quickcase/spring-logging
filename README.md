@@ -6,7 +6,7 @@ A Java module which standardises the logging for the reform projects.
 
 ## Prerequisites
 
-- [Java 11](https://www.oracle.com/java)
+- [Java 17](https://www.oracle.com/java)
 
 ## User guide
 

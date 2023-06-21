@@ -13,6 +13,12 @@ allprojects {
   apply plugin: 'jacoco'
   apply plugin: 'pmd'
 
+  java {
+    toolchain {
+      languageVersion = JavaLanguageVersion.of(17)
+    }
+  }
+
   checkstyle {
     toolVersion = '8.39'
     maxWarnings = 0
@@ -31,8 +37,6 @@ allprojects {
   jacoco {
     toolVersion = "0.8.4"
   }
-
-  sourceCompatibility = 11
 
   repositories {
     mavenLocal()
