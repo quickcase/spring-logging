@@ -11,7 +11,7 @@ public class CustomJsonLayout extends JsonLayout {
 
     public CustomJsonLayout() {
         super();
-        setIncludeMDC(false);
+        setIncludeMDC(true);
         setIncludeContextName(false);
         setIncludeLoggerName(false);
     }
