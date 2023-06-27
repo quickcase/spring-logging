@@ -20,6 +20,14 @@ public class CustomJsonLayout extends JsonLayout {
     protected void addCustomDataToJsonMap(Map<String, Object> map, ILoggingEvent event) {
         // Add custom logger attribute names
         add(LOGGER_ATTR_NAME, true, event.getLoggerName(), map);
+        // Add custom key/value pairs
+        if (event.getKeyValuePairs() != null) {
+            event.getKeyValuePairs()
+                 .forEach((kvp) -> add(kvp.key, true, toString(kvp.value), map));
+        }
     }
 
+    private String toString(Object obj) {
+        return obj != null ? obj.toString() : null;
+    }
 }
